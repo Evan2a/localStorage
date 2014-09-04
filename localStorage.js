@@ -149,23 +149,15 @@ if( wls ){
         return (value + '').split('|');
     }
 
-    /*
-     * @fn 刷新本地存储长度
-     * @private
-    */
-    var refreshLength = function(){
-        __storage.load(cache);
-        var ret = __storage.getAttribute(cache);
-
-        if( ret == null ){
-            toolkit.localStorage.length = 0;
-        } else {
-            toolkit.localStorage.length = ret.split('|').length;
-        }
-    }
 
     toolkit.localStorage = {
-        length: 0,
+        length: (function(){
+
+            __storage.load(cache);
+            var ret = __storage.getAttribute(cache);
+
+            return ret == null ? 0 : ret.split('|').length;
+        })(),
 
         /*
          * @method localStorage setItem
@@ -246,8 +238,6 @@ if( wls ){
         }
     }
     
-    // 初始化一次length
-    refreshLength();
 }
 
 window.toolkit = toolkit;
