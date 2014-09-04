@@ -1,7 +1,6 @@
 # localStorage
 
 > 使用userData模拟localStorage对IE6/7进行支持
-============
 
 ```js
 var ls = toolkit.localStorage;
